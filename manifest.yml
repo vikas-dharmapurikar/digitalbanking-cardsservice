@@ -1,5 +1,6 @@
 applications:
 - name: digitalbanking-cardsservice
+  buildpack: https://github.com/cloudfoundry/java-buildpack
   memory: 1024M
   instances: 1
   env:
