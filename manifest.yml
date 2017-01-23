@@ -1,0 +1,10 @@
+applications:
+- name: digitalbanking-cardsservice
+  memory: 1024M
+  instances: 1
+  env:
+    SPRING_PROFILES_ACTIVE: prod, cloudfoundry
+  host: digitalbanking-cardsservice
+  disk_quota: 1024M
+  command:
+  - java -jar cardservices-1.0.jar server configuration.yml
