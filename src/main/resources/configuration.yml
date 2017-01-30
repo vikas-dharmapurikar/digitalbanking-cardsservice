@@ -20,7 +20,7 @@ database:
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
   # the maximum amount of time to wait on an empty pool before throwing an exception
-  maxWaitForConnection: 1s
+  maxWaitForConnection: 50s
 
   # the SQL query to run when validating a connection's liveness
   validationQuery: "/* MyApplication Health Check */ SELECT 1"
