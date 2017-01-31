@@ -1,3 +1,7 @@
+applications:
+- name: digitalbanking-investmentsservice
+  services:
+  - CardServiceDb
 Manifest-Version: 1.0
 Sealed: true
 Main-Class: main.java.com.capg.cardservices.App
