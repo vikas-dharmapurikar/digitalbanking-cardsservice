@@ -9,7 +9,7 @@ database:
   password: 2iy0Ltc80KUSr6woE9OE8hW40AG_hUv8
 
   # the JDBC URL
-  url: jdbc:postgresql://echo-01.db.elephantsql.com:5432/iyufcqrl
+  url: jdbc:postgresql://echo.db.elephantsql.com:5432/iyufcqrl
 
   # any properties specific to your JDBC driver:
   properties:
