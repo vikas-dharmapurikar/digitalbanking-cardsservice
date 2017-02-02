@@ -32,6 +32,10 @@ database:
   checkConnectionWhileIdle: false
   
 server:
+  maxThreads: 8
+  minThreads: 8
   applicationConnectors:
   - type: http 
     port: 8100
+    acceptorThreads: 50
+    selectorThreads: 50
