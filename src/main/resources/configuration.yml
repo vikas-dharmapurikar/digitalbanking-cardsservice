@@ -32,7 +32,7 @@ database:
   checkConnectionWhileIdle: false
   
 server:
-  maxThreads: 8
+  maxThreads: 100
   minThreads: 8
   applicationConnectors:
   - type: http 
