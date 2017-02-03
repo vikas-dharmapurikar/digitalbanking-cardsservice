@@ -5,7 +5,7 @@
 	<groupId>com.capg.cardservices</groupId>
 	<artifactId>cardservices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Card Services</name>
 	<description>Card Services</description>
@@ -93,7 +93,7 @@
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 				<property>
 					<name>env</name>
 					<value>dev</value>
@@ -107,7 +107,7 @@
 		<profile>
 			<id>docker</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 				<property>
 					<name>env</name>
 					<value>docker</value>
