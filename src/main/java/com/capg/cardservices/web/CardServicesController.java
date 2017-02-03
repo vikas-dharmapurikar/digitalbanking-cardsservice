@@ -1,56 +1,51 @@
 package com.capg.cardservices.web;
 
 import java.util.List;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
-import com.capg.cardservices.dao.CardDAO;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.capg.cardservices.model.Card;
-
-import io.dropwizard.hibernate.UnitOfWork;
-
-@Path("/cardservices")
-@Produces(MediaType.APPLICATION_JSON)
-
+import com.capg.cardservices.service.CardService;
+/***
+ * Controller for Card services
+ * @author sujillel
+ *
+ */
+@RestController
+@ComponentScan("com.capg.cardservices")
+@EnableAutoConfiguration
 public class CardServicesController {
+	static Logger logger = Logger.getLogger(CardServicesController.class);
 
-	private CardDAO cardDAO;
+	@Autowired
+	private CardService cardService;
 	
-	  public CardServicesController(CardDAO cardDAO) {
-	        this.cardDAO = cardDAO;
-	    }
-
-	@Path("/{customerId}/cards")   
-	@GET
-	@UnitOfWork
-	public List<Card> getCardList(@PathParam("customerId")  int customerId) {
-       
-    	//Customer customer=new Customer();
-    	//customer.setCustomerId(customerId);
-		System.out.println("inside card list");
-    	return cardDAO.findByCustomerId(customerId);
+	@CrossOrigin
+	@RequestMapping(value="/cardservices/{customerId}/cards",method = RequestMethod.GET)
+	public List<Card> getCardList(@PathVariable  Integer customerId) {
+		if(customerId == null) {
+			logger.warn("Invalid customerId for getCardListByCustomerId : "+customerId);
+			return null;
+		}
+		
+    	return cardService.getCardListByCustomerId(customerId);
     }
 	
-	
-	@Path("/{cardNo}/card")
-	@GET
-	@UnitOfWork
-	public Card getCardDetails(@PathParam("cardNo")  long cardNo) {
-       
-    	//Customer customer=new Customer();
-    	//customer.setCustomerId(customerId);
-		System.out.println("inside card Details"+cardNo);
-    	return cardDAO.findByCardNo(cardNo);
+	@CrossOrigin
+	@RequestMapping(value="/cardservices/{cardNo}/card",method = RequestMethod.GET)
+	public Card getCardDetails(@PathVariable  Long cardNo) {
+		if(cardNo == null) {
+			logger.warn("Invalid customerId for getCardByNo : "+cardNo);
+			return null;
+		}
+    	return cardService.getCardByNo(cardNo);
     }
-	
 }

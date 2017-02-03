@@ -3,32 +3,16 @@ package com.capg.cardservices.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-
-import io.dropwizard.hibernate.AbstractDAO;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capg.cardservices.model.Card;
 
-public class CardDAO extends AbstractDAO<Card>{
-	public CardDAO(SessionFactory factory) {
-        super(factory);
-    }
-
-  
+@Repository
+@Transactional
+public interface CardDAO extends JpaRepository<Card,Long> {
 	 	
-	public List<Card> findByCustomerId(int customerId)
-	{
-		
-       // StringBuilder builder = new StringBuilder("%");
-		System.out.println("inside dao"+customerId);
-        //builder.append(customerId).append("%");
-        return list(namedQuery("com.capg.cardservices.Card.GetByCustomerId").setParameter("customerId", customerId));
-
-	}
-	public Card findByCardNo(long cardNo)
-	{
-		System.out.println("inside dao"+cardNo);
-
-		return get(cardNo);
-	}
+	public List<Card> findByCustomerId(Integer customerId);
+	public Card findByCardNo(Long cardNo);
 }

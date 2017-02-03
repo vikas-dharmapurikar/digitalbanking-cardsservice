@@ -5,49 +5,54 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+@Configuration
+@Component
 @Entity
-
-@Table(name = "card")
-
-@NamedQueries({
-   
-	
-	@NamedQuery(name = "com.capg.cardservices.Card.GetByCustomerId", query= " from Card c where c.customerId = :customerId")
-
-})
-
-
+@Table(name = "CARD")
 public class Card {
-
-	public Card()
-	{}
-	
 	//card_no
-@Id
-@Column(name = "card_no")
-
-	long cardNo ;
-	//cvv
+	@Id
+	@Column(name = "card_no")
+	Long cardNo ;
 	
-@Column(name = "cvv")
+	//cvv
 
-int cvv;
+	@Column(name = "cvv")
+	int cvv;
+	
 	//expiry_date
-@Column(name = "expiry_date")
-
+	@Column(name = "expiry_date")
 	Date expiryDate;
+	
 	//card_type
-@Column(name = "card_type")
-
+	@Column(name = "card_type")
 	String cardType; 
-	public long getCardNo() {
+	
+	//customer_id
+	@Column(name = "customer_id")
+	Integer customerId;
+	
+	//card_company
+	@Column(name = "card_company")
+	String cardCompany;
+	
+	//credit_limit
+	@Column(name = "credit_limit")
+	double creditLimit; 
+	
+	//card_status
+	@Column(name = "card_status")
+	boolean cardStatus ;
+	
+	public Long getCardNo() {
 		return cardNo;
 	}
-	public void setCardNo(long cardNo) {
+	public void setCardNo(Long cardNo) {
 		this.cardNo = cardNo;
 	}
 	public int getCvv() {
@@ -68,10 +73,10 @@ int cvv;
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-	public int getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 	public String getCardCompany() {
@@ -92,22 +97,10 @@ int cvv;
 	public void setCardStatus(boolean cardStatus) {
 		this.cardStatus = cardStatus;
 	}
-	//customer_id
-	@Column(name = "customer_id")
-
-	int customerId;
-	//card_company
-	@Column(name = "card_company")
-
-	String cardCompany;
-	//credit_limit
-	@Column(name = "credit_limit")
-
-	double creditLimit;  
-	//card_status
-	@Column(name = "card_status")
-
-	boolean cardStatus ;
-	
-	
+	@Override
+	public String toString() {
+		return "Card [cardNo=" + cardNo + ", cvv=" + cvv + ", expiryDate=" + expiryDate + ", cardType=" + cardType
+				+ ", customerId=" + customerId + ", cardCompany=" + cardCompany + ", creditLimit=" + creditLimit
+				+ ", cardStatus=" + cardStatus + "]";
+	}
 }

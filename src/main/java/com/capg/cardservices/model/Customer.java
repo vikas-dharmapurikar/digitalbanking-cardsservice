@@ -1,15 +1,13 @@
 package com.capg.cardservices.model;
 
-
-
 public class Customer {
-private int customerId;
+	private int customerId;
 
-public int getCustomerId() {
-	return customerId;
-}
+	public int getCustomerId() {
+		return customerId;
+	}
 
-public void setCustomerId(int customerId) {
-	this.customerId = customerId;
-}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 }
