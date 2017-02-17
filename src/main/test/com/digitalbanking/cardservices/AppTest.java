@@ -1,4 +1,4 @@
-package digitalbanking.cardservices;
+package com.digitalbanking.cardservices;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
