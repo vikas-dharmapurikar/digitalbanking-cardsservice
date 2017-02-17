@@ -8,6 +8,6 @@ RUN cd /digitalbanking-loansservice
 
 RUN mvn -f /digitalbanking-loansservice/pom.xml clean install -DskipTests
 
-EXPOSE 8110
+EXPOSE 8100
 
 ENTRYPOINT ["java", "-jar", "/digitalbanking-loansservice/target/loanservice-1.0.jar"]
