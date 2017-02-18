@@ -1,15 +1,20 @@
 package com.capg.cardservices.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.capg.cardservices.dao.CardDAO;
+import com.capg.cardservices.dao.TransactionDAO;
 import com.capg.cardservices.model.Card;
+import com.capg.cardservices.model.Transaction;
 import com.capg.cardservices.service.CardService;
-import com.capg.cardservices.web.CardServicesController;
 /***
  * Service layer for getting the card details from DB
  * @author sujillel
@@ -17,10 +22,16 @@ import com.capg.cardservices.web.CardServicesController;
  */
 @Service
 public class CardServiceImpl implements CardService {
-	static Logger logger = Logger.getLogger(CardServicesController.class);
+	static Logger logger = Logger.getLogger(CardServiceImpl.class);
 
+	@Value("${max.recent.transactions}")
+	private Integer maxRecentTransactions;
+	
 	@Autowired
 	private CardDAO cardDao;
+	
+	@Autowired
+	private TransactionDAO transactionDao;
 	
 	@Override
 	public List<Card> getCardListByCustomerId(Integer customerId){
@@ -42,5 +53,26 @@ public class CardServiceImpl implements CardService {
 			return null;
 		}
 		return cardDao.findByCardNo(cardNo);
+	}
+
+	@Override
+	public List<Transaction> getRecentTransactions(Long cardNum
+			, String startDate
+			, String endDate) {
+		Date startDt;
+		List<Transaction> txList = null;
+		try {
+			startDt = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date endDt =new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			txList = transactionDao.getTransactions(cardNum, startDt, endDt);
+			
+			// Get max 10 recent transactions
+			if(txList!= null && txList.size()>maxRecentTransactions){
+				txList = txList.subList(0, maxRecentTransactions-1);
+			}
+		} catch (ParseException e) {
+			logger.error(e.getMessage());
+		}
+		return txList;
 	}
 }

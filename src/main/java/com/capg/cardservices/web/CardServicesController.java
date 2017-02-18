@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.cardservices.model.Card;
+import com.capg.cardservices.model.Transaction;
 import com.capg.cardservices.service.CardService;
 /***
  * Controller for Card services
@@ -48,4 +49,12 @@ public class CardServicesController {
 		}
     	return cardService.getCardByNo(cardNo);
     }
+	
+	@RequestMapping(value="/cardservices/{cardNo}/{startDate}/{endDate}/getRecentTransactions"
+			,method = RequestMethod.POST)
+	public List<Transaction> getRecentTransactions(@PathVariable Long cardNo
+			, @PathVariable String startDate
+			, @PathVariable String endDate) {
+		return cardService.getRecentTransactions(cardNo, startDate, endDate);
+	}
 }

@@ -32,3 +32,22 @@ CREATE TABLE public.customer (
 
 ALTER TABLE public.customer
     OWNER to postgres;
+    
+CREATE TABLE public.cards_transaction
+(
+    sno numeric(16) NOT NULL,
+    tx_date date,
+    tx_type character varying(10),
+    tx_description character varying(250),
+    tx_value numeric(10, 2),
+    card_no numeric(16),
+    reward_points numeric(10),
+    PRIMARY KEY (sno)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.cards_transaction
+    OWNER to postgres;
