@@ -10,4 +10,4 @@ RUN mvn -f /digitalbanking-loansservice/pom.xml clean install -DskipTests
 
 EXPOSE 8100
 
-ENTRYPOINT ["java", "-jar", "/digitalbanking-loansservice/target/loanservice-1.0.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker", "/digitalbanking-loansservice/target/loanservice-1.0.jar"]
