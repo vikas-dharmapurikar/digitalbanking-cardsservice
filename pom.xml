@@ -5,7 +5,7 @@
 	<groupId>com.capg.cardservices</groupId>
 	<artifactId>cardservices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Card Services</name>
 	<description>Card Services</description>
