@@ -52,6 +52,7 @@ public class CardServiceImpl implements CardService {
 			logger.warn("Invalid CardNo for finding card By CardNo : "+cardNo);
 			return null;
 		}
+		logger.info("Getting card by no.");
 		return cardDao.findByCardNo(cardNo);
 	}
 
@@ -73,6 +74,7 @@ public class CardServiceImpl implements CardService {
 		} catch (ParseException e) {
 			logger.error(e.getMessage());
 		}
+		logger.info("Getting recent transactions");
 		return txList;
 	}
 }

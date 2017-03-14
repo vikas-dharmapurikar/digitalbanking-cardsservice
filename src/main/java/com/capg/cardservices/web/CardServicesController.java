@@ -36,7 +36,7 @@ public class CardServicesController {
 			logger.warn("Invalid customerId for getCardListByCustomerId : "+customerId);
 			return null;
 		}
-		
+		logger.info("Request Mapped");
     	return cardService.getCardListByCustomerId(customerId);
     }
 	
@@ -47,6 +47,7 @@ public class CardServicesController {
 			logger.warn("Invalid customerId for getCardByNo : "+cardNo);
 			return null;
 		}
+		logger.info("Request Mapped");
     	return cardService.getCardByNo(cardNo);
     }
 	
@@ -55,6 +56,7 @@ public class CardServicesController {
 	public List<Transaction> getRecentTransactions(@PathVariable Long cardNo
 			, @PathVariable String startDate
 			, @PathVariable String endDate) {
+		logger.info("Request Mapped");
 		return cardService.getRecentTransactions(cardNo, startDate, endDate);
 	}
 }
