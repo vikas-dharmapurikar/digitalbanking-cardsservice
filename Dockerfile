@@ -20,6 +20,8 @@ RUN cd /digitalbanking-cardsservice
 
 RUN mvn -f /digitalbanking-cardsservice/pom.xml clean install -DskipTests
 
+COPY newrelic/ /opt/
+
 EXPOSE 8100
 
-ENTRYPOINT ["a8sidecar", "--register", "--supervise", "java", "-jar", "-Dspring.profiles.active=docker", "/digitalbanking-cardsservice/target/cardservices-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["a8sidecar", "--register", "--supervise", "java", "-jar", "-Dnewrelic-config-file=/opt/newrelic.yml", "-javaagent:/opt/newrelic.jar", "-Dspring.profiles.active=docker", "/digitalbanking-cardsservice/target/cardservices-0.0.1-SNAPSHOT.jar"]
