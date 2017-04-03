@@ -24,8 +24,8 @@ import com.capg.cardservices.service.CardService;
 public class CardServiceImpl implements CardService {
 	static Logger logger = Logger.getLogger(CardServiceImpl.class);
 
-	@Value("${max.recent.transactions}")
-	private Integer maxRecentTransactions;
+	//@Value("#{myProperties[max.recent.transactions]}")
+	private @Value("${max.recent.transactions}") Integer maxRecentTransactions;
 	
 	@Autowired
 	private CardDAO cardDao;
